@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+
+    <title>FileCLoud - Simple File Sharing System On Cloud </title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbar-static/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      /* Show it's not fixed to the top */
+      body {
+        min-height: 75rem;
+      }
+
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+  
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+  
+      input[type="file"] {
+        margin-bottom: 15px;
+      }
+  
+      .email-field {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+  
+      .email-field label {
+        flex: 1;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+  
+      .email-field input {
+        flex: 2;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+  
+      .submit-btn {
+        margin-top: 20px;
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+  
+      .submit-btn:hover {
+        background-color: #0056b3;
+      }
+
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="navbar-top.css" rel="stylesheet">
+  </head>
+  <body>
+    
+<nav class="navbar navbar-expand-md navbar-dark mb-4" style="background-color: black;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/dashboard">FileCloud</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/dashboard">UploadAndEmail</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard/usage">MyUploadLists</a>
+        </li>
+      </ul>
+      <a href="/logout"> 
+        <button class="btn btn-outline-danger" style="color: white;">Logout</button>
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<main class="container">
+  <br>
+  <br>
+  <br>
+ <div class="row">
+  <div class="col-3">
+  </div>
+  <div class="col-7">
+    <h1>File Upload and Email</h1>
+    <form action="/dashboard/upload" method="post" enctype="multipart/form-data">
+      <div class="email-field">
+        <label>Select The File To Be Uploaded</label>
+        <input type="file" name="file" />
+      </div>
+      <div class="email-field">
+        <span style="color: red;">you can share the file link to emails (min-1, max-upto 5)</span>
+      </div>
+      <% for (let i = 1; i <= 5; i++) { %>
+        <div class="email-field">
+          <label>Email <%= i %>:</label>
+          <% if(i==1) { %>
+            <input type="email" name="email<%= i %>" required />
+          <% } else { %>
+            <input type="email" name="email<%= i %>" />
+          <% } %>
+        </div>
+      <% } %>
+      <button class="submit-btn" type="submit">Upload and Send</button>
+    </form>
+    <!-- <form action="/dashboard/upload" method="post" enctype="multipart/form-data">
+      <div class="email-field">
+      <label>Select The File To Be Uploaded</label>
+      <input type="file" name="file" />
+      </div>
+      <div class="email-field">
+        <label>Email 1:</label>
+        <input type="email" name="email1" required />
+      </div>
+      <div class="email-field">
+        <label>Email 2:</label>
+        <input type="email" name="email2" />
+      </div>
+      <div class="email-field">
+        <label>Email 3:</label>
+        <input type="email" name="email3" />
+      </div>
+      <div class="email-field">
+        <label>Email 4:</label>
+        <input type="email" name="email4" />
+      </div>
+      <div class="email-field">
+        <label>Email 5:</label>
+        <input type="email" name="email5" />
+      </div>
+      <button class="submit-btn" type="submit">Upload and Send </button>
+    </form> -->
+  </div>
+ </div>
+
+</main>
+
+
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+      
+  </body>
+</html>

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+
+    <title>FileCLoud - Simple File Sharing System On Cloud </title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/navbar-static/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      /* Show it's not fixed to the top */
+      body {
+        min-height: 75rem;
+      }
+
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+  
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+  
+      input[type="file"] {
+        margin-bottom: 15px;
+      }
+  
+      .email-field {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+  
+      .email-field label {
+        flex: 1;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+  
+      .email-field input {
+        flex: 2;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+  
+      .submit-btn {
+        margin-top: 20px;
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+  
+      .submit-btn:hover {
+        background-color: #0056b3;
+      }
+
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    
+  </head>
+  <body>
+    
+<nav class="navbar navbar-expand-md navbar-dark mb-4" style="background-color: black;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/dashboard">FileCloud</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link "href="/dashboard">UploadAndEmail</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/dashboard/usage">MyUploadLists</a>
+        </li>
+      </ul>
+      <a href="/logout"> 
+        <button class="btn btn-outline-danger" style="color: white;">Logout</button>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+   <h4 style="text-align: center;font-weight: 700;">Your Uploads - Uploads/DiskUsage for Billing</h4>
+
+    <div class="table-responsive">
+            <table class="table">
+                <thead class="table ">
+                    <% let diskusage = 0 %>
+                    <% if( items.length > 0 ) { %>
+                        
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">FileName</th>
+                            <th scope="col">FC-FileName</th>
+                            <th scope="col">FileSize(InBytes)</th>
+                            <th scope="col">S3URL</th>
+                            <th scope="col">FileRecipients</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0; i < items.length; i++) { %>
+                                <% diskusage = diskusage+ items[i].fileSize %>
+                                <tr>
+                                    <th scope="row"><%= items[i].id %></th>
+                                    <th><%= items[i].originalName %></th>
+                                    <th><%= items[i].uniqueFileName %></th>
+                                    <th><%= items[i].fileSize %></th>
+                                    <th><%= items[i].s3Url %></th>
+                                    <th>
+                                        <% let mystring = '' %>
+                                        <% for(var j=0; j < items[i].toemails.data.length; j++) { %>
+                                           <% mystring = mystring+ `${items[i].toemails.data[j].email}`+',' %>
+                                        <% } %>
+                                    <%= mystring %>
+                                    </th>
+                                </tr>
+
+                            <% } %>
+                            
+                        
+                    </tbody>
+                              <% }  else {%>
+                                <h3 style="text-align: center;">No Records Found</h3>
+                         <% } %>
+               
+            </table>
+</div>
+<h4 style="font-weight: 700;"> Total S3 Disk Usage (inBytes) From DynamoDB Records : <%= diskusage %> Bytes </h4>
+</main>
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
